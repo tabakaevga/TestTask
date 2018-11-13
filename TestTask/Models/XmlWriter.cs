@@ -27,7 +27,7 @@ namespace TestTask.Models
                     }
                     else
                     {
-                        throw new ArgumentException("Data key not found");
+                        throw new ArgumentException("Не найден ключ");
                     }
                 }
                 else
@@ -40,6 +40,10 @@ namespace TestTask.Models
                             item.Value = data[(string)el.Attribute("name")][i];
                             i++;
                         }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Не найден ключ");
                     }
                 }
             }
