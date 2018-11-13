@@ -10,34 +10,20 @@ namespace TestTask.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly XmlParser _parser = new XmlParser();
+
         public IActionResult Index()
         {
-            return View();
+            return View(_parser.TagNameValuePairs);
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public string Submission()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var dataFromForm = Request.Form;
+            var writer = new XmlWriter();
+            writer.WriteToXml(dataFromForm);
+            return "Edited Successfully";
         }
     }
 }
