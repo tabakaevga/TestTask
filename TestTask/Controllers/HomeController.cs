@@ -10,13 +10,17 @@ namespace TestTask.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly XmlParser _parser = new XmlParser();
-
+        /// <summary>
+        /// Отображение данных на html странице
+        /// </summary>
         public IActionResult Index()
         {
-            return View(_parser.TagNameValuePairs);
+            return View(new  XmlParser().TagNameValuePairs);
         }
 
+        /// <summary>
+        /// Обработка метода Post при нажатии на кнопку Submit в форме
+        /// </summary>
         [HttpPost]
         public string Submission()
         {
